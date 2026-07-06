@@ -18,9 +18,9 @@ const register = async (req: Request, res: Response) => {
 
     const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '7d' });
 
-    res.status(201).json({ success: true, token });
+    return res.status(201).json({ success: true, token });
     } catch (error) {
-    res.status(500).json({ success: false, error: 'Failed to register user' });
+    return res.status(500).json({ success: false, error: 'Failed to register user' });
   }
 };
 
@@ -37,9 +37,9 @@ const login = async (req: Request, res: Response) => {
 
     const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '7d' });
 
-    res.status(201).json({ success: true, token });
+    return res.status(201).json({ success: true, token });
   } catch (error) {
-    res.status(500).json({ success: false, error: 'Failed to login' });
+    return res.status(500).json({ success: false, error: 'Failed to login' });
   }
 };
 

@@ -28,9 +28,9 @@ const createReservation = async (req: Request, res: Response) => {
       status: 'pending',
     });
 
-    res.status(201).json({ success: true, reservation });
+    return res.status(201).json({ success: true, reservation });
   } catch (error) {
-    res.status(500).json({ success: false, error: 'Failed to create reservation' });
+    return res.status(500).json({ success: false, error: 'Failed to create reservation' });
   }
 };
 
