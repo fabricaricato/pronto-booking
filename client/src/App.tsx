@@ -1,6 +1,6 @@
 import './App.css';
 
-function App() {
+export function App() {
   return (
     <main>
       <h1>Pronto!</h1>
@@ -9,4 +9,4 @@ function App() {
   );
 }
 
-export default App;
+export {};
