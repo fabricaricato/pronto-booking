@@ -9,10 +9,10 @@ export interface AuthRequest extends Request {
 
 const authMiddleware = (req: AuthRequest, res: Response, next: NextFunction) => {
   const header = req.headers.authorization;
-  if (!header) return res.status(401).json({ error: 'Missing authorization header' });
+  if (!header) return res.status(401).json({ success: false, error: 'Missing authorization header' });
 
   const parts = header.split(' ');
-  if (parts.length !== 2 || parts[0] !== 'Bearer') return res.status(401).json({ error: 'Invalid authorization format' });
+  if (parts.length !== 2 || parts[0] !== 'Bearer') return res.status(401).json({ success: false, error: 'Invalid authorization format' });
 
   const token = parts[1];
   try {
@@ -20,7 +20,7 @@ const authMiddleware = (req: AuthRequest, res: Response, next: NextFunction) => 
     req.userId = payload.id;
     next();
   } catch (err) {
-    return res.status(401).json({ error: 'Invalid token' });
+    return res.status(401).json({ success: false, error: 'Invalid token' });
   }
 };
 

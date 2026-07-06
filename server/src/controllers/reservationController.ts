@@ -17,7 +17,7 @@ const createReservation = async (req: Request, res: Response) => {
     });
 
     if (hasConflict) {
-      return res.status(409).json({ error: 'This resource is already reserved for the selected time range' });
+      return res.status(409).json({ success: false, error: 'This resource is already reserved for the selected time range' });
     }
 
     const reservation = await Reservation.create({
@@ -28,9 +28,9 @@ const createReservation = async (req: Request, res: Response) => {
       status: 'pending',
     });
 
-    res.status(201).json(reservation);
+    res.status(201).json({ success: true, reservation });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to create reservation' });
+    res.status(500).json({ success: false, error: 'Failed to create reservation' });
   }
 };
 
