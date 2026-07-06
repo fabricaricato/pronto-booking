@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'change_me';
 
-export const register = async (req: Request, res: Response) => {
+const register = async (req: Request, res: Response) => {
   try {
     const { email, password, name, role } = req.body;
     if (!email || !password || !name) return res.status(400).json({ error: 'Missing fields' });
@@ -26,7 +26,7 @@ export const register = async (req: Request, res: Response) => {
   }
 };
 
-export const login = async (req: Request, res: Response) => {
+const login = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) return res.status(400).json({ error: 'Missing fields' });
@@ -46,3 +46,5 @@ export const login = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Failed to login' });
   }
 };
+
+export { register, login };
