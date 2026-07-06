@@ -7,7 +7,7 @@ export interface AuthRequest extends Request {
   userId?: string;
 }
 
-export const authMiddleware = (req: AuthRequest, res: Response, next: NextFunction) => {
+const authMiddleware = (req: AuthRequest, res: Response, next: NextFunction) => {
   const header = req.headers.authorization;
   if (!header) return res.status(401).json({ error: 'Missing authorization header' });
 
@@ -23,3 +23,5 @@ export const authMiddleware = (req: AuthRequest, res: Response, next: NextFuncti
     return res.status(401).json({ error: 'Invalid token' });
   }
 };
+
+export { authMiddleware };

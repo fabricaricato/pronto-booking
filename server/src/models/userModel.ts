@@ -14,4 +14,4 @@ const userSchema = new Schema<IUser>({
   role: { type: String, enum: ['user', 'admin'], default: 'user' },
 }, { timestamps: true });
 
-export default model<IUser>('User', userSchema);
+export const User = model<IUser>('User', userSchema);
