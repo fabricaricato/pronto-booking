@@ -1,6 +1,15 @@
 import { Request, Response } from 'express';
 import { Reservation } from '../models/reservationModel';
 
+const getReservations = async (req: Request, res: Response) => {
+  try {
+    const reservations = await Reservation.find().populate('resource').populate('user');
+    return res.json({ success: true, reservations });
+  } catch (error) {
+    return res.status(500).json({ success: false, error: 'Failed to fetch reservations' });
+  }
+};
+
 const createReservation = async (req: Request, res: Response) => {
   try {
     const { resource, user, startDate, endDate } = req.body;
@@ -34,4 +43,4 @@ const createReservation = async (req: Request, res: Response) => {
   }
 };
 
-export { createReservation };
+export { createReservation, getReservations };
